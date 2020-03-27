@@ -1,0 +1,32 @@
+.infoTable{
+  margin: 0 auto;
+  border-collapse: collapse;
+  td{
+    padding: 8px 10px;
+    font-size: 18px;
+    border: solid black 1px;
+  }
+}
+.canvas{
+  display: block;
+  margin: 10px auto;
+  border: solid 2px black;
+}
+.linksWrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+.linkWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.link{
+   
+}
