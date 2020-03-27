@@ -23,7 +23,7 @@ export class Links extends React.Component {
         this.setState({links: linksArr});
     }
     render() {
-        console.log('this.props.amount');
+        console.log(this.props.amount);
         const links = this.state.links.map((item, index) => {
             return(
               <div className = "linkWrapper" key = {index}>

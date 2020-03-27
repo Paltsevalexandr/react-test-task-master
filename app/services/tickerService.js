@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import React from 'react';
-import {DataTable} from './InfoTable.js';
+import {DataTable} from './UI/InfoTable.js';
 
 export class Connect extends React.Component {
     constructor() {
@@ -18,12 +18,7 @@ export class Connect extends React.Component {
             console.log('connected');
             socket.on(stockSymbol, (data) => {
                 console.log(data);
-                if(this.state.data.length < 1) {
-                    this.getHeaders(data);
-                    this.handleData(data);
-                } else if(this.state.data.length >= 1) {
-                    this.handleData(data);
-                }
+                this.handleData(data);
             });
 
             socket.emit('ticker', stockSymbol);
@@ -34,26 +29,17 @@ export class Connect extends React.Component {
         });
     }
     handleData(data) {
-        this.setState({data: [...this.state.data, JSON.parse(data)]},
+        this.setState({data: [JSON.parse(data), ...this.state.data]},
         ()=> {
             this.priceChanges();
         });
     }
-    getHeaders(data) {
-        const dataObj = JSON.parse(data);
-        const keys = Object.keys(dataObj);
-        const headerObj = {};
-        keys.map((elem)=>{
-            headerObj[elem] = elem;
-        });
-        this.setState({data: [headerObj, ...this.state.data]});
-    }
     priceChanges() {
-        if(this.state.data.length > 2) {
-            if(this.state.data[this.state.data.length - 1].price > this.state.data[this.state.data.length - 2].price) {
-                this.setState({priceChanges: [...this.state.priceChanges, true]});
-            }else if(this.state.data[this.state.data.length - 1].price < this.state.data[this.state.data.length - 2].price) {
-                this.setState({priceChanges: [...this.state.priceChanges, false]});
+        if(this.state.data.length > 1) {
+            if(this.state.data[0].price > this.state.data[1].price) {
+                this.setState({priceChanges: [true, ...this.state.priceChanges]});
+            }else if(this.state.data[0].price < this.state.data[1].price) {
+                this.setState({priceChanges: [false, ...this.state.priceChanges]});
             }
         }
     }

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Links} from './links.js';
-import {Select} from './UI/select.js';
+import {Select} from './select.js';
+import {TableHeader} from './tableHeader.js';
 
 export class DataTable extends React.Component {
     constructor(props) {
@@ -19,11 +20,11 @@ export class DataTable extends React.Component {
     render() {
         const info = this.props.data.map((item, index)=>{
             return(
-            <tr key={index} style = {{backgroundColor: this.props.riseOrFall[index] ? 'rgb(98, 219, 98)' : 'pink'}}>
-                <td>{item.ticker}</td> 
+            <tr key={index} style = {{backgroundColor: this.props.priceChanges[index] ? 'rgb(98, 219, 98)' : 'pink'}}>
+                <td>{item.ticker}</td>
                 <td>{item.exchange}</td>
                 <td>
-                    <span>{this.props.riseOrFall[index] ?  '▲' : '▼'}</span>
+                    <span>{this.props.priceChanges[index] ?  '▲' : '▼'}</span>
                     {item.price}
                 </td>
                 <td>{item.change}</td>
@@ -37,10 +38,11 @@ export class DataTable extends React.Component {
         return(
             <div>
                 <Select
-                selectAmount = {e=>this.selectAmount(e)}
-                amount = {this.state.amount}
+                    selectAmount = {e=>this.selectAmount(e)}
+                    amount = {this.state.amount}
                 />
                 <table className = "infoTable">
+                    <TableHeader/>
                     <tbody>
                         {info}
                     </tbody>
@@ -55,5 +57,5 @@ export class DataTable extends React.Component {
 }
 DataTable.propTypes = {
     data: PropTypes.array,
-    riseOrFall: PropTypes.array
+    priceChanges: PropTypes.array
 };

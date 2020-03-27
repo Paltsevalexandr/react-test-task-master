@@ -1,16 +1,11 @@
 .infoTable{
   margin: 0 auto;
   border-collapse: collapse;
-  td{
+  th, td{
     padding: 8px 10px;
     font-size: 18px;
     border: solid black 1px;
   }
-}
-.canvas{
-  display: block;
-  margin: 10px auto;
-  border: solid 2px black;
 }
 .linksWrap{
   display: flex;
