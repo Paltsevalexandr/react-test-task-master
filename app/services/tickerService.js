@@ -5,7 +5,9 @@ import {DataTable} from './InfoTable.js';
 export class Connect extends React.Component {
     constructor() {
         super();
-        this.state = {data: [], riseOrFall: [true, true]};
+        this.state = {data: [], priceChanges: [true, true]};
+    }
+    componentDidMount() {
         this.connect('AAPL');
     }
     connect(stockSymbol) {
@@ -18,7 +20,7 @@ export class Connect extends React.Component {
                 console.log(data);
                 if(this.state.data.length < 1) {
                     this.getHeaders(data);
-                    ()=>this.handleData(data);
+                    this.handleData(data);
                 } else if(this.state.data.length >= 1) {
                     this.handleData(data);
                 }
@@ -34,7 +36,7 @@ export class Connect extends React.Component {
     handleData(data) {
         this.setState({data: [...this.state.data, JSON.parse(data)]},
         ()=> {
-            this.riseOrFall();
+            this.priceChanges();
         });
     }
     getHeaders(data) {
@@ -46,12 +48,12 @@ export class Connect extends React.Component {
         });
         this.setState({data: [headerObj, ...this.state.data]});
     }
-    riseOrFall() {
+    priceChanges() {
         if(this.state.data.length > 2) {
             if(this.state.data[this.state.data.length - 1].price > this.state.data[this.state.data.length - 2].price) {
-                this.setState({riseOrFall: [...this.state.riseOrFall, true]});
+                this.setState({priceChanges: [...this.state.priceChanges, true]});
             }else if(this.state.data[this.state.data.length - 1].price < this.state.data[this.state.data.length - 2].price) {
-                this.setState({riseOrFall: [...this.state.riseOrFall, false]});
+                this.setState({priceChanges: [...this.state.priceChanges, false]});
             }
         }
     }
@@ -59,7 +61,7 @@ export class Connect extends React.Component {
         return(
             <DataTable
                 data = {this.state.data}
-                riseOrFall = {this.state.riseOrFall}
+                priceChanges = {this.state.priceChanges}
             />
       );
     }
