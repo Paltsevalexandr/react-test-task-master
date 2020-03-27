@@ -20,6 +20,7 @@ export class DataTable extends React.Component {
         const info = this.props.data.map((item, index)=>{
             return(
             <tr key={index} style = {{backgroundColor: this.props.riseOrFall[index] ? 'rgb(98, 219, 98)' : 'pink'}}>
+                <td>{item.ticker}</td> 
                 <td>{item.exchange}</td>
                 <td>
                     <span>{this.props.riseOrFall[index] ?  '▲' : '▼'}</span>
@@ -35,6 +36,10 @@ export class DataTable extends React.Component {
         });
         return(
             <div>
+                <Select
+                selectAmount = {e=>this.selectAmount(e)}
+                amount = {this.state.amount}
+                />
                 <table className = "infoTable">
                     <tbody>
                         {info}
