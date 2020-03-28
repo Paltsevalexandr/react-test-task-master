@@ -10,19 +10,21 @@ export class DataTable extends React.Component {
     }
     render() {
         return(
-            <div>
-                <table className = "infoTable">
-                    <TableHeader/>
-                    <TableRows
-                    data = {this.props.data}
-                    priceChanges = {this.props.priceChanges}
-                    />
-                </table>
-            </div>
+            <table className = "infoTable">
+                <TableHeader/>
+                <TableRows
+                data = {this.props.data}
+                priceChanges = {this.props.priceChanges}
+                rowsRange = {this.props.rowsRange}
+                amount = {this.props.amount}
+                />
+            </table>
         );
     }
 }
 DataTable.propTypes = {
     data: PropTypes.array,
-    priceChanges: PropTypes.array
+    priceChanges: PropTypes.array,
+    rowsRange: PropTypes.number,
+    amount: PropTypes.string
 };

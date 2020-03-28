@@ -1,14 +1,14 @@
 import '../styles/application.scss';
 import {Connect} from '../services';
 import {DataTable} from './UI/DataTable.js';
-import {Links} from './UI/links.js';
+import {GetLinks} from './UI/links/getLinks.js';
 import {Select} from './UI/select.js';
 import React, {PureComponent} from 'react';
 
 class App extends PureComponent {
     constructor() {
         super();
-        this.state = {data: [], priceChanges: [true], amount: '10', rowsRange: []};
+        this.state = {data: [], priceChanges: [true], amount: '10', rowsRange: 0};
         this.displayedRowsRange = this.displayedRowsRange.bind(this);
         this.handleData = this.handleData.bind(this);
     }
@@ -29,9 +29,7 @@ class App extends PureComponent {
         this.setState({amount: e.target.value});
     }
     displayedRowsRange(coeff, index) {
-        this.setState({rowsRange: [coeff * index - coeff, coeff * index]}, ()=> {
-            console.log(this.state.rowsRange);
-        });
+        this.setState({rowsRange: coeff * index - coeff});
     }
     render() {
         return (
@@ -40,19 +38,22 @@ class App extends PureComponent {
                 <Connect
                     handleData = {this.handleData}
                 />
-                <Select
-                    selectAmount = {e=>this.selectAmount(e)}
-                    amount = {this.state.amount}
-                />
+                <div className = "optionsWrap">
+                    <Select
+                        selectAmount = {e=>this.selectAmount(e)}
+                        amount = {this.state.amount}
+                    />
+                    <GetLinks
+                        amount = {this.state.amount}
+                        data = {this.state.data}
+                        displayedRowsRange = {this.displayedRowsRange}
+                    />
+                </div>
                 <DataTable
                     data = {this.state.data}
                     priceChanges = {this.state.priceChanges}
                     rowsRange = {this.state.rowsRange}
-                />
-                <Links
                     amount = {this.state.amount}
-                    data = {this.state.data}
-                    displayedRowsRange = {this.displayedRowsRange}
                 />
             </div>
         );

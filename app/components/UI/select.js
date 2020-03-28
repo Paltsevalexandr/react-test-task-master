@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 export function Select(props) {
     return (
       <div>
+          <p>Show lines on page:</p>
           <select onChange = {e=>props.selectAmount(e)} value = {props.amount}>
               <option value = "5">5</option>
               <option value = "10">10</option>

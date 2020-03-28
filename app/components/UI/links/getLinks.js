@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-export class Links extends React.Component {
+import {Pagination} from './pagination.js';
+export class GetLinks extends React.Component {
     constructor(props) {
         super(props);
         this.state = {links: []};
@@ -23,24 +24,19 @@ export class Links extends React.Component {
         this.setState({links: linksArr});
     }
     render() {
-        const links = this.state.links.map((item, index) => {
-            return(
-              <div className = "linkWrapper" key = {index}>
-                  <a href = "#"
-                  onClick = {()=>this.props.displayedRowsRange(this.props.amount, index + 1)}
-                  className = "link">
-                  {index + 1}
-                  </a>
-              </div>
-            );
-        });
         return(
-          <div className = "linksWrap">{links}</div>
+            <Pagination
+            links = {this.state.links}
+            prevLink = {this.state.prevLink}
+            nextLink = {this.state.nextLink}
+            amount = {this.props.amount}
+            displayedRowsRange = {this.props.displayedRowsRange}
+            />
         );
     }
 }
-Links.propTypes = {
+GetLinks.propTypes = {
     data: PropTypes.array,
     amount: PropTypes.string,
-    displayedRowsRange: PropTypes.func
+    displayedRowsRange: PropTypes.func,
 };

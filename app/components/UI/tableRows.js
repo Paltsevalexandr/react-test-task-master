@@ -8,19 +8,18 @@ export class TableRows extends React.Component {
     }
     componentDidUpdate(prevProps) {
         if(this.props !== prevProps) {
-            this.getSelectDataRange(5, 6);
-            this.getSelectPriceChanges(5, 6);
+            this.getSelectDataRange(this.props.rowsRange, this.props.amount);
+            this.getSelectPriceChanges(this.props.rowsRange, this.props.amount);
         }
     }
-    getSelectDataRange(begin, end) {
-        const arr = [...this.props.data];
-        const customArr = arr.splice(begin, end);
-        console.log(customArr);
+    getSelectDataRange(begin, amount) {
+        const dataArr = [...this.props.data];
+        const customArr = dataArr.splice(begin, amount);
         this.setState({selectDataRows: customArr});
     }
-    getSelectPriceChanges(begin, end) {
-        const arr = [...this.props.priceChanges];
-        const customArr = arr.splice(begin, end);
+    getSelectPriceChanges(begin, amount) {
+        const dataArr = [...this.props.priceChanges];
+        const customArr = dataArr.splice(begin, amount);
         this.setState({selectPriceChanges: customArr});
     }
     render() {
@@ -51,5 +50,6 @@ export class TableRows extends React.Component {
 TableRows.propTypes = {
     data: PropTypes.array,
     priceChanges: PropTypes.array,
-    rowsRange: PropTypes.array
+    rowsRange: PropTypes.number,
+    amount: PropTypes.string
 };
