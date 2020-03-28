@@ -27,8 +27,6 @@ export class GetLinks extends React.Component {
         return(
             <Pagination
             links = {this.state.links}
-            prevLink = {this.state.prevLink}
-            nextLink = {this.state.nextLink}
             amount = {this.props.amount}
             displayedRowsRange = {this.props.displayedRowsRange}
             />

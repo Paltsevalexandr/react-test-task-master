@@ -4,7 +4,7 @@ import {RenderLinks} from './renderLinks.js';
 export class Pagination extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {page: 1};
+        this.state = {page: 0};
         this.setPage = this.setPage.bind(this);
     }
     setPage(index) {
@@ -18,8 +18,7 @@ export class Pagination extends React.Component {
                     key = {index}
                     index = {index}
                     amount = {this.props.amount}
-                    foundPrevLinks = {this.props.foundPrevLinks}
-                    foundNextLinks = {this.props.foundNextLinks}
+                    setPage = {this.setPage}
                     displayedRowsRange = {this.props.displayedRowsRange}
                     />
                 );

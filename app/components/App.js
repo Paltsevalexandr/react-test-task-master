@@ -1,8 +1,10 @@
 import '../styles/application.scss';
+import '../styles/table.scss';
+import '../styles/options.scss';
 import {Connect} from '../services';
-import {DataTable} from './UI/DataTable.js';
-import {GetLinks} from './UI/links/getLinks.js';
-import {Select} from './UI/select.js';
+import {DataTable} from './UI/Table/DataTable.js';
+import {GetLinks} from './UI/Links/getLinks.js';
+import {Select} from './UI/Select/select.js';
 import React, {PureComponent} from 'react';
 
 class App extends PureComponent {

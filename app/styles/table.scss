@@ -1,0 +1,13 @@
+.infoTable{
+  margin: 10px auto;
+  border-collapse: collapse;
+  th, td{
+    padding: 8px 10px;
+    font-size: 18px;
+    border: solid black 1px;
+  }
+  th{
+    background-color: rgb(51, 51, 51);
+    color: beige;
+  }
+}
